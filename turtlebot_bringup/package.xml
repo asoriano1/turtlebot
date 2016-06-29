@@ -32,4 +32,5 @@
   <run_depend>rocon_app_manager</run_depend>
   <run_depend>rocon_bubble_icons</run_depend>
   <run_depend>depthimage_to_laserscan</run_depend>
+  <run_depend>rplidar_ros</run_depend>
 </package>

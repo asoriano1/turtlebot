@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>turtlebot_scripts</name>
+  <version>0.0.0</version>
+  <description>The turtlebot_scripts package. Contains some scripts to configure devices</description>
+
+  <maintainer email="rnavarro@robotnik.es">rnavarro</maintainer>
+
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+
+  </export>
+</package>

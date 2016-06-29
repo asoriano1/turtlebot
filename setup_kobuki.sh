@@ -1,3 +1,4 @@
+#!/bin/bash
 # This configures the environment variables for a kobuki based turtlebot.
 # Currently this script isn't actually needed as the values below are 
 # defaults.
@@ -10,4 +11,5 @@
 export TURTLEBOT_BASE=kobuki
 export TURTLEBOT_STACKS=hexagons
 export TURTLEBOT_3D_SENSOR=kinect
+export TURTLEBOT_TOP_PLATE_DEVICE=rplidar
 export TURTLEBOT_SIMULATION=false
