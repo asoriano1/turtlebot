@@ -35,7 +35,7 @@
     </joint>
     <link name="camera_link">
       <visual>
-        <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="package://turtlebot_description/meshes/sensors/astra.dae" scale="${astra_dae_display_scale} ${astra_dae_display_scale} ${astra_dae_display_scale}"/>
         </geometry>
