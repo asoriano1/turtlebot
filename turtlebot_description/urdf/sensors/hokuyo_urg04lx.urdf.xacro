@@ -4,20 +4,21 @@
   <xacro:property name="H_SCALE" value="0.025"/>
 
 	
-  <xacro:macro name="sensor_hokuyo_urg04lx" params="name prefix_frame parent *origin min_angle:=2.0943 max_angle:=-2.0943">
+  <!--xacro:macro name="sensor_hokuyo_urg04lx" params="prefix parent *origin min_angle:=2.0943 max_angle:=-2.0943"-->
+  <xacro:macro name="sensor_hokuyo_urg04lx" params="prefix parent *origin min_angle:=1.59 max_angle:=-1.59">
      
-    <joint name="${prefix_frame}${name}_laser_joint" type="fixed">
+    <joint name="${prefix}laser_joint" type="fixed">
       <!-- FRONT MOUNT  -->
       <!-- origin xyz="0.29 0 0.1" -->
       <!-- TOP MOUNT -->
       <!-- origin xyz="0.0 0.0 0.325"-->
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
-      <child link="${prefix_frame}${name}_laser_link"/>
+      <child link="${prefix}laser_link"/>
     </joint>
   
     
-    <link name="${prefix_frame}${name}_laser_link">
+    <link name="${prefix}laser_link">
       <collision>
         <origin xyz="0 0 -0.05" rpy="0 0 0"/>
         <geometry>
@@ -41,14 +42,14 @@
     
   
     <!-- Hokuyo sensor for simulation -->		
-    <xacro:sensor_hokuyo_urg_gazebo prefix_frame="${prefix_frame}"/>
+    <xacro:sensor_hokuyo_urg_gazebo prefix="${prefix}"/>
 		
   </xacro:macro>
   
     
-  <xacro:macro name="sensor_hokuyo_urg_gazebo" params="prefix_frame">
-    <gazebo reference="${prefix_frame}${name}_laser_link">
-			<sensor type="ray" name="${name}_sensor">
+  <xacro:macro name="sensor_hokuyo_urg_gazebo" params="prefix">
+    <gazebo reference="${prefix}laser_link">
+			<sensor type="ray" name="${prefix}sensor">
 				<pose>0 0 0 0 0 0</pose>
 				<visualize>false</visualize>
 				<update_rate>10</update_rate>
@@ -73,8 +74,8 @@
 					</noise>
 				</ray>
 				<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-					<topicName>${name}/scan</topicName>
-					<frameName>${prefix_frame}${name}_laser_link</frameName>
+					<topicName>scan</topicName>
+					<frameName>${prefix}laser_link</frameName>
 					<ignoreTfPrefix>1</ignoreTfPrefix>
 				</plugin>
 			</sensor>

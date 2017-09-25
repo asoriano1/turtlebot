@@ -13,9 +13,9 @@
   <xacro:kobuki prefix_frame="$(arg prefix_frame)"/>
   <xacro:stack_hexagons prefix_frame="$(arg prefix_frame)"  parent="$(arg prefix_frame)base_link"/>
   <xacro:sensor_astra prefix_frame="$(arg prefix_frame)" parent="$(arg prefix_frame)base_link"/>
-  <xacro:sensor_hokuyo_urg04lx name="hokuyo" prefix_frame="$(arg prefix_frame)" parent="$(arg prefix_frame)plate_top_link" >
+  <sensor_hokuyo_urg04lx prefix="$(arg prefix_frame)" parent="$(arg prefix_frame)plate_top_link" >
 		<origin xyz="0.137 0 0.0525" rpy="0 0 0" /> 
-  </xacro:sensor_hokuyo_urg04lx>
+  </sensor_hokuyo_urg04lx>
 
   <!-- here add the arm --> 
  

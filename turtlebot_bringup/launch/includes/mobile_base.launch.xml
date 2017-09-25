@@ -10,9 +10,11 @@
   <!-- mobile base -->
   <arg name="base"/>
   <arg name="serialport"/>
+  <arg name="prefix_frame"/>
   <include file="$(find turtlebot_bringup)/launch/includes/$(arg base)/mobile_base.launch.xml">
     <arg name="serialport" value="$(arg serialport)"/>
     <arg name="manager" value="mobile_base_nodelet_manager"/>
+    <arg name="prefix_frame" value="$(arg prefix_frame)"/>
   </include>
   
   <!-- velocity commands multiplexer -->

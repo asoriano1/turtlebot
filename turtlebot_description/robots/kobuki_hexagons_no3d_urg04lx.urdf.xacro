@@ -6,12 +6,14 @@
     - top_plate : urg04lx
 -->    
 <robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
-
-  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_library.urdf.xacro" />
   
-  <kobuki/>
-  <stack_hexagons parent="base_link"/>
-  <sensor_hokuyo_urg04lx name="hokuyo" parent="plate_top_link" >
+  <xacro:arg name="prefix_frame" default=""/>
+  <!--xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_library.urdf.xacro" /-->
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_library_multi.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
+  <kobuki prefix_frame="$(arg prefix_frame)"/>
+  <stack_hexagons prefix_frame="$(arg prefix_frame)" parent="$(arg prefix_frame)base_link"/>
+  <sensor_hokuyo_urg04lx prefix="$(arg prefix_frame)" parent="$(arg prefix_frame)plate_top_link" >
 		<origin xyz="0.137 0 0.0525" rpy="0 0 0" /> 
   </sensor_hokuyo_urg04lx>
   
