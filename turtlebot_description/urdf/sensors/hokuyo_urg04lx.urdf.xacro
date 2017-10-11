@@ -5,7 +5,7 @@
 
 	
   <!--xacro:macro name="sensor_hokuyo_urg04lx" params="prefix parent *origin min_angle:=2.0943 max_angle:=-2.0943"-->
-  <xacro:macro name="sensor_hokuyo_urg04lx" params="prefix parent *origin min_angle:=1.59 max_angle:=-1.59">
+  <xacro:macro name="sensor_hokuyo_urg04lx" params="prefix parent *origin min_angle:=1.5708 max_angle:=-1.5708">
      
     <joint name="${prefix}laser_joint" type="fixed">
       <!-- FRONT MOUNT  -->
@@ -56,7 +56,8 @@
 				<ray>
 					<scan>
 						<horizontal>
-							<samples>681</samples>
+							<!--samples>681</samples-->
+							<samples>180</samples>
 							<resolution>1</resolution>
 							<min_angle>${min_angle}</min_angle>
 							<max_angle>${max_angle}</max_angle>
