@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : nostacks
+    - 3d Sensor : no3d
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="prefix_frame" default=""/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_library_multi.urdf.xacro" />
+  
+  <xacro:kobuki prefix_frame="$(arg prefix_frame)"/>
+  <xacro:no_stacks prefix_frame="$(arg prefix_frame)"  parent="$(arg prefix_frame)base_link"/>
+  <sensor_rplidar prefix="$(arg prefix_frame)" parent="$(arg prefix_frame)plate_bottom_link">
+	<origin xyz="0 0.0 -0.005" rpy="0 0 0"/>
+  </sensor_rplidar>
+  
+</robot>
