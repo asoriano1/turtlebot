@@ -1,0 +1,13 @@
+joint_blw_velocity_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: robot_0_wheel_left_joint
+joint_brw_velocity_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: robot_0_wheel_right_joint
+joint_elevator_controller:
+  type: position_controllers/JointPositionController
+  joint: robot_0_plate_middle_joint
+
+joint_read_state_controller:
+  type: joint_state_controller/JointStateController 
+  publish_rate: 100.0

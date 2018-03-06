@@ -4,6 +4,8 @@
  -->
 <robot name="no_stacks" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find turtlebot_description)/urdf/common_properties.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/nostacks.gazebo.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/nostacks.transmission.xacro"/>
 
   <!-- Xacro properties -->
   <xacro:property name="M_SCALE" value="0.001"/>
@@ -97,7 +99,7 @@
       <collision>
         <origin xyz="-0.02364 0 0" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.006" radius="0.170"/>
+          <cylinder length="0.007" radius="0.170"/>
         </geometry>
       </collision>
       <inertial>
@@ -114,10 +116,12 @@
     <stack_middle_pole prefix_frame="${prefix_frame}" parent="${parent}" number="2" x_loc="-0.0381" y_loc= "0.1505" z_loc="0.1640"/>
     <stack_middle_pole prefix_frame="${prefix_frame}" parent="${parent}" number="3" x_loc="-0.0381" y_loc="-0.1505" z_loc="0.1640"/>
     
-    <joint name="${prefix_frame}plate_middle_joint" type="fixed">
-      <origin xyz="-0.01364 0.0 0.1874" rpy="0 0 0"/>
+    <joint name="${prefix_frame}plate_middle_joint" type="prismatic">
+      <origin xyz="-0.01364 0.0 0.1914" rpy="0 0 0"/>
       <parent link="${parent}"/>
       <child link="${prefix_frame}plate_middle_link"/>
+      <limit lower="0" upper="0.1" effort="1.0" velocity="0.5"/>
+      <axis xyz="0 0 1"/>
     </joint>  
     <link name="${prefix_frame}plate_middle_link">
       <visual>
@@ -129,7 +133,7 @@
       <collision>
         <origin xyz="0.01364 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.006" radius="0.170"/>
+          <cylinder length="0.007" radius="0.170"/>
         </geometry>
       </collision>
       <inertial>
@@ -140,6 +144,8 @@
                  izz="0.006656" />
       </inertial>  
     </link>
-    
+
+    <xacro:elevator_transmission prefix_frame="${prefix_frame}" />
+
   </xacro:macro>
 </robot>
