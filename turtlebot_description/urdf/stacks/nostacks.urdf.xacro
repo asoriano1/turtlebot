@@ -4,7 +4,7 @@
  -->
 <robot name="no_stacks" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find turtlebot_description)/urdf/common_properties.urdf.xacro"/>
-  <!--xacro:include filename="$(find turtlebot_description)/urdf/stacks/nostacks.gazebo.xacro"/-->
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/nostacks.gazebo.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/stacks/nostacks.transmission.xacro"/>
 
   <!-- Xacro properties -->
@@ -133,15 +133,15 @@
       <collision>
         <origin xyz="0.01364 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.007" radius="0.170"/>
+          <cylinder length="0.007" radius="0.150"/>
         </geometry>
       </collision>
       <inertial>
-        <mass value="0.520" />
+        <mass value="0.0520" />
         <origin xyz="0 0 0" />
-        <inertia ixx="0.003328" ixy="0.0" ixz="0.0"
-                 iyy="0.003328" iyz="0.0"
-                 izz="0.006656" />
+        <inertia ixx="0.0003328" ixy="0.0" ixz="0.0"
+                 iyy="0.0003328" iyz="0.0"
+                 izz="0.0006656" />
       </inertial>  
     </link>
 
