@@ -5,7 +5,10 @@
  -->
 <launch>
   <!-- mobile base nodelet manager -->
-  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager">
+   <param name="odom_frame" value="$(arg prefix_frame)odom" />
+    <param name="base_frame" value="$(arg prefix_frame)base_footprint" />
+  </node>
   
   <!-- mobile base -->
   <arg name="base"/>
