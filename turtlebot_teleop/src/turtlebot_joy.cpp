@@ -33,6 +33,10 @@
 #include "boost/thread/mutex.hpp"
 #include "boost/thread/thread.hpp"
 #include "ros/console.h"
+#include <actionlib/client/simple_action_client.h>
+#include <turtlebot_elevator/SetElevatorAction.h>
+
+typedef actionlib::SimpleActionClient<turtlebot_elevator::SetElevatorAction> ElevatorActionClient;
 
 class TurtlebotTeleop
 {
@@ -45,12 +49,13 @@ private:
 
   ros::NodeHandle ph_, nh_;
 
-  int linear_, angular_, deadman_axis_;
+  int linear_, angular_, deadman_axis_, elevator_axis_;
   double l_scale_, a_scale_;
   ros::Publisher vel_pub_;
   ros::Subscriber joy_sub_;
-
+  ElevatorActionClient ac;
   geometry_msgs::Twist last_published_;
+  turtlebot_elevator::SetElevatorGoal elevator_goal;
   boost::mutex publish_mutex_;
   bool deadman_pressed_;
   bool zero_twist_published_;
@@ -63,6 +68,8 @@ TurtlebotTeleop::TurtlebotTeleop():
   linear_(1),
   angular_(0),
   deadman_axis_(4),
+  ac("set_elevator", true),
+  elevator_axis_(7),
   l_scale_(0.3),
   a_scale_(0.9)
 {
@@ -71,6 +78,12 @@ TurtlebotTeleop::TurtlebotTeleop():
   ph_.param("axis_deadman", deadman_axis_, deadman_axis_);
   ph_.param("scale_angular", a_scale_, a_scale_);
   ph_.param("scale_linear", l_scale_, l_scale_);
+
+
+   ROS_INFO("Waiting for elevator action server to start.");
+  // wait for the action server to start
+  ac.waitForServer(); //will wait for infinite time
+  ROS_INFO("Elevator action server started.");
 
   deadman_pressed_ = false;
   zero_twist_published_ = false;
@@ -88,6 +101,11 @@ void TurtlebotTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   vel.linear.x = l_scale_*joy->axes[linear_];
   last_published_ = vel;
   deadman_pressed_ = joy->buttons[deadman_axis_];
+  if(joy->axes[elevator_axis_]){
+      elevator_goal.pos.value = joy->axes[elevator_axis_];
+  }else{
+     elevator_goal.pos.value = 0;
+  }
 }
 
 void TurtlebotTeleop::publish()
@@ -98,6 +116,10 @@ void TurtlebotTeleop::publish()
   {
     vel_pub_.publish(last_published_);
     zero_twist_published_=false;
+    if(elevator_goal.pos.value){
+       ac.sendGoal(elevator_goal);
+    }
+        
   }
   else if(!deadman_pressed_ && !zero_twist_published_)
   {

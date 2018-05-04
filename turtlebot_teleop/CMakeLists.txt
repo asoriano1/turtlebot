@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 2.8.3)
 project(turtlebot_teleop)
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS roscpp geometry_msgs joy)
+find_package(catkin REQUIRED COMPONENTS roscpp geometry_msgs joy turtlebot_elevator actionlib)
 
 include_directories(${catkin_INCLUDE_DIRS})
 
 catkin_package(
   INCLUDE_DIRS
-  CATKIN_DEPENDS roscpp geometry_msgs joy
+  CATKIN_DEPENDS roscpp geometry_msgs joy turtlebot_elevator actionlib
   DEPENDS
 )
 
