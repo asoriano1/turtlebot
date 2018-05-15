@@ -69,7 +69,7 @@ TurtlebotTeleop::TurtlebotTeleop():
   angular_(0),
   deadman_axis_(4),
   ac("set_elevator", true),
-  elevator_axis_(7),
+  elevator_axis_(10),
   l_scale_(0.3),
   a_scale_(0.9)
 {
