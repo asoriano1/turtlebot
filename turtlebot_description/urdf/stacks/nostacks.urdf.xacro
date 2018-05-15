@@ -160,6 +160,8 @@
     </collision>
   </gazebo>
   <xacro:elevator_transmission prefix_frame="${prefix_frame}" />
-
+	
   </xacro:macro>
+
+  
 </robot>
